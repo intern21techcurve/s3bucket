@@ -1,5 +1,6 @@
 const express = require("express");
 const controller = require("../controller/conqtController")
+const validation = require("../Validation/validate")
 
 
 const upload = require("../Module/upload"); // Make sure to adjust the path accordingly
@@ -41,7 +42,7 @@ router.post("/upload", upload.single("file"), async (req, res) => {
   }
 
 });
-router.post('/upload', controller.addData),
+router.post('/upload',validation.validateDetails , controller.addData),
 router.get('/showData', controller.showData),
 router.put('/updateData', controller.updateData),
 
