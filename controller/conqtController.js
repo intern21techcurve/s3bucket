@@ -1,15 +1,27 @@
 const connection = require('../config/connection');
-const addData= ((req, resp) => {
+const addData = (req, resp) => {
     const data = req.body;
-    const query = "INSERT INTO data (purchageRequest,purchageDescrption,cateogry,location,purchageGroup,purchageQuantity,purchageUnit,startDate,endDate,delivaryDate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)"
-    connection.query(query, [data.purchageRequest, data.purchageDescrption, data.cateogry, data.location, data.purchageGroup, data.purchageQuantity, data.purchageUnit, data.startDate, data.endDate, data.delivaryDate], (err, result) => {
-        if (!err) {
-            resp.status(201).send(result);
-          } else {
-            resp.status(500).json(err);
-          }
+    const query = "INSERT INTO data (purchageRequest, purchageDescription, category, location, purchageGroup, purchageQuantity, purchageUnit, startDate, endDate, deliveryDate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+  
+    connection.query(query, [
+      data.purchageRequest,
+      data.purchageDescription,
+      data.category,
+      data.location,
+      data.purchageGroup,
+      data.purchageQuantity,
+      data.purchageUnit,
+      data.startDate,
+      data.endDate,
+      data.deliveryDate
+    ], (err, result) => {
+      if (!err) {
+        resp.status(201).send(result);
+      } else {
+        resp.status(500).json(err);
+      }
     });
-});
+  };
 const showData=((req,resp)=>{
     
     var query = "select * from data"
@@ -26,8 +38,8 @@ const showData=((req,resp)=>{
     const updateData =((req,resp)=>{
         const id = req.params.id;
         let data = req.body;
-        var query = "update  data set name = ?, age =?, description=? where id = ?"
-        connection.query(query,[data.name,data.age,data.description,id],(err,result)=>{
+        var query = "update  data set purchageRequest = ?, purchageDescrption =?,cateogry =?,location=?, purchageGroup=?,purchageQuantity=?,purchageUnit=?,startDate=?,endDate=?, deliveryDate=?, where id = ?"
+        connection.query(query,[data.purchageRequest,data.purchageDescrption,data.cateogry,data.location,data.purchageGroup,data.purchageQuantity,data.purchageUnit,data.startDate,data.endDate,data.delivaryDate, id],(err,result)=>{
             if(!err)
             {
                 if(result.affectedRows==0){
