@@ -42,7 +42,7 @@ router.post("/upload", upload.single("file"), async (req, res) => {
   }
 
 });
-router.post('/upload',validation.validateDetails , controller.addData),
+router.post('/addData' ,validation.validateDetails, controller.addData,),
 router.get('/showData', controller.showData),
 router.put('/updateData', controller.updateData),
 
